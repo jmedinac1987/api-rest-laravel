@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Pelicula;
+use App\Http\Requests\PeliculaStoreRequest;
+use App\Http\Requests\PeliculaUpdateRequest;
+
 use Illuminate\Support\Facades\Response;
 
 
@@ -38,18 +42,8 @@ class PeliculasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PeliculaStoreRequest $request)
     {
-        if ((!$request->titulo) || (!$request->genero) || (!$request->director) || (!$request->fechaEstreno) || (!$request->precio) || (!$request->sipnosis)) 
-        {
-            
-            $response = Response::json([
-                'message' => 'Por favor diligencie todos los datos requeridos'
-            ],422);
-
-            return $response;
-        }
-
         if ( (!$request->formato_portada) || (!$request->nombre_portada)) {
             $comodinFormatoPortada = "Sin Archivo Seleccionado" ;
             $comodinNombrePortada = "Sin Archivo Seleccionado";
@@ -125,17 +119,8 @@ class PeliculasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PeliculaUpdateRequest $request, $id)
     {
-        if ((!$request->titulo) || (!$request->genero) || (!$request->director) || (!$request->fechaEstreno) || (!$request->precio) || (!$request->sipnosis)) 
-        {
-            
-            $response = Response::json([
-                'message' => 'Por favor diligencie todos los datos requeridos'
-            ],422);
-
-            return $response;
-        }
 
         if ( (!$request->formato_portada) || (!$request->nombre_portada)) {
             $comodinFormatoPortada = "Sin Archivo Seleccionado" ;
